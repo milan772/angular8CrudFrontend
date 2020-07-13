@@ -10,7 +10,7 @@ export class TutorialsListComponent implements OnInit {
   tutorials : any;
   currentTutorial = null;
   currentIndex  = -1;
-  name = '';
+  name: string = '';
 
   constructor(private tutorialService: TutorialService) { }
 

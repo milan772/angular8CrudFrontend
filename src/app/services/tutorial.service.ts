@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ConfigVariable } from '../shared/app.config';
 
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = ConfigVariable.BASE_API_URL;
 
 @Injectable({
   providedIn: 'root'
@@ -14,19 +15,19 @@ export class TutorialService {
     return this.http.get(baseUrl+'customers');
   }
 
-  get(id) {
+  get(id: number) {
     return this.http.get(baseUrl+'customers/'+id);
   }
 
-  create(data){
-    return this.http.post(baseUrl+'customers', data);
+  create(tutorial: any = []){
+    return this.http.post(baseUrl+'customers', tutorial);
   }
 
-  update(id, data) {
-    return this.http.put(baseUrl+'customers/'+id, data);
+  update(id: number, tutorial: any = []) {
+    return this.http.put(baseUrl+'customers/'+id, tutorial);
   }
 
-  delete(id) {
+  delete(id: number) {
     return this.http.delete(baseUrl+'customers/'+id);
   }
 
@@ -34,7 +35,7 @@ export class TutorialService {
     return this.http.delete(baseUrl+'customers');
   }
 
-  findByTitle(title) {
+  findByTitle(title: string) {
     return this.http.get(baseUrl+'customers?'+'name='+title);
   }
 }

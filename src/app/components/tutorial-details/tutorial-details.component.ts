@@ -10,7 +10,7 @@ import { VirtualTimeScheduler } from 'rxjs';
 })
 export class TutorialDetailsComponent implements OnInit {
   currentTutorial = null;
-  message = '';
+  message: string = '';
 
   constructor(
     private tutorialService: TutorialService,
@@ -19,14 +19,14 @@ export class TutorialDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getTutorial(this.route.snapshot.paramMap.get('id'));
+    this.getTutorial(parseInt(this.route.snapshot.paramMap.get('id')));
   }
 
   /**
    * 
    * @param id 
    */
-  getTutorial(id){
+  getTutorial(id : number){
     this.tutorialService.get(id)
       .subscribe( 
         data => {
@@ -41,7 +41,7 @@ export class TutorialDetailsComponent implements OnInit {
    * 
    * @param status 
    */
-  updatePublished(status){
+  updatePublished(status: boolean){
     const data = {
       name: this.currentTutorial.name,
       email: this.currentTutorial.email,
@@ -61,6 +61,7 @@ export class TutorialDetailsComponent implements OnInit {
     this.tutorialService.update(this.currentTutorial.id, this.currentTutorial)
       .subscribe( response => {
         this.message = 'The tutorial was updated successfully!';
+        this.router.navigate(['/tutorials']);
       },
       error => {
         console.log(error);
